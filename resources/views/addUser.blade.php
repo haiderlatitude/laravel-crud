@@ -1,4 +1,3 @@
-
     @if(session()->has('message'))
         <div>
             {{ session('message') }}

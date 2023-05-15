@@ -21,11 +21,24 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
-        return redirect('crud')->with('message', 'User has been added successfully!');
+        return redirect('/')->with('message', 'User has been added successfully!');
     }
 
     public function destroy($id){
         User::find($id)->delete();
-        return redirect('crud')->with('message', 'The user has been deleted!');
+        return redirect('/')->with('message', 'User has been deleted successfully!');
+    }
+
+    public function update(Request $request){
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($request->password === "New Password")
+            $user->password = $user->password;
+        else
+            $user->password = $request->password;
+        
+        $user->save();
+        return redirect('/')->with('message', 'User details have been updated successfully!');
     }
 }

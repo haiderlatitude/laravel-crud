@@ -7,6 +7,11 @@
     <title>Laravel CRUD</title>
 </head>
 <body>
+    @if(session()->has('message'))
+        <div>
+            {{session('message')}}
+        </div>
+    @endif
     <form action='{{route("addUser")}}'>
         <button>Add User</button>
     </form>
@@ -25,8 +30,8 @@
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->password}}</td>
-            <td><a href="{{route('editUser', $user->id)}}">Edit</a></td>
-            <td><a href="{{route('delete', $user->id)}}">Delete</a></td>
+            <td>@include('editUserButton')</td>
+            <td>@include('deleteUser')</td>
         </tr>
     @endforeach
     </table>
